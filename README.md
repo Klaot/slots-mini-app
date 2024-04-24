@@ -14,6 +14,12 @@ Mini Apps platform using the following technologies:
 
 ## First Start
 
+Generate certificate
+
+```bash
+mkcert -key-file ./https-key.pem -cert-file ./https-cert.pem 'team.local'
+```
+
 If you have just cloned this template, you should install the project dependencies using the
 command:
 
