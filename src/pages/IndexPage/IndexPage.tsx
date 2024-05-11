@@ -10,11 +10,8 @@ import './IndexPage.css';
 
 export const IndexPage: FC = () => {
   const { userId } = useParams();
-  console.log('🚀 ~ userId:', userId);
   const data = useInitData();
   const isOwner = !userId || +userId === data?.user?.id;
-  console.log('🚀 ~ isOwner:', isOwner);
-  console.log('🚀 ~ data?.user?.id:', data?.user?.id);
 
   const descriptionCell = (datetime: string, price: number) => {
     return (
