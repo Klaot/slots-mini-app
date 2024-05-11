@@ -3,9 +3,9 @@ import {
   useBackButtonIntegration,
   useNavigatorIntegration,
 } from '@tma.js/react-router-integration';
-import { useBackButton, useInitData } from '@tma.js/sdk-react';
+import { useBackButton, useInitData, useLaunchParams } from '@tma.js/sdk-react';
 import { AppRoot, Avatar, Cell } from '@xelene/tgui';
-import { type FC, useMemo } from 'react';
+import { type FC, useEffect, useMemo } from 'react';
 import { Navigate, Route, Router, Routes } from 'react-router-dom';
 
 import { routes } from '~/navigation/routes.tsx';
@@ -13,12 +13,19 @@ import { routes } from '~/navigation/routes.tsx';
 import '@xelene/tgui/dist/styles.css';
 
 export const App: FC = () => {
+  const launchParams = useLaunchParams();
   const tmaNavigator = useMemo(createNavigator, []);
   const [location, navigator] = useNavigatorIntegration(tmaNavigator);
   const backButton = useBackButton();
   const initData = useInitData();
 
   useBackButtonIntegration(tmaNavigator, backButton);
+
+  useEffect(() => {
+    if (launchParams.startParam?.startsWith('u_')) {
+      navigator.replace(`/u/${launchParams.startParam.slice(2)}`);
+    }
+  }, [launchParams, navigator]);
 
   return (
     <AppRoot>

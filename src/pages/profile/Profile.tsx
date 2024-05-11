@@ -1,8 +1,7 @@
 import { Avatar, Button, Cell, Textarea } from '@xelene/tgui';
 import { Clock9, Coins } from 'lucide-react';
 import { type FC } from 'react';
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Page } from '~/components/Page/Page.tsx';
 

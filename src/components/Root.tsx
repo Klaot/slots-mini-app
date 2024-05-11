@@ -1,7 +1,6 @@
-import { setDebug } from '@tma.js/sdk';
-import { DisplayGate, SDKProvider, useLaunchParams } from '@tma.js/sdk-react';
+import { DisplayGate, SDKProvider } from '@tma.js/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { type FC, useEffect, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 
 import { App } from '~/components/App.tsx';
 import { ErrorBoundary } from '~/components/ErrorBoundary.tsx';
@@ -36,19 +35,9 @@ const ErrorBoundarySDK: FC<{ error: unknown }> = ({ error }) => (
 const Loading: FC = () => <div>Application is loading</div>;
 
 const Inner: FC = () => {
-  const launchParams = useLaunchParams();
-
   const manifestUrl = useMemo(() => {
     return new URL('tonconnect-manifest.json', window.location.href).toString();
   }, []);
-
-  // Enable debug mode to see all the methods sent and events received.
-  useEffect(() => {
-    if (launchParams.startParam === 'debug') {
-      setDebug(true);
-      import('eruda').then((lib) => lib.default.init());
-    }
-  }, [launchParams]);
 
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
