@@ -9,9 +9,7 @@ import { ErrorBoundary } from '~/components/ErrorBoundary.tsx';
 const DisplayError: FC<{ error: unknown }> = ({ error }) => (
   <blockquote>
     <code>
-      {error instanceof Error
-        ? error.message
-        : JSON.stringify(error)}
+      {error instanceof Error ? error.message : JSON.stringify(error)}
     </code>
   </blockquote>
 );
@@ -26,8 +24,8 @@ const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
 const ErrorBoundarySDK: FC<{ error: unknown }> = ({ error }) => (
   <div>
     <p>
-      An error occurred while initializing the SDK. You are probably running the application
-      outside of Telegram (in usual browser, for example).
+      An error occurred while initializing the SDK. You are probably running the
+      application outside of Telegram (in usual browser, for example).
     </p>
     <DisplayError error={error} />
   </div>
@@ -52,8 +50,14 @@ const Inner: FC = () => {
 
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
-      <SDKProvider options={{ acceptCustomStyles: true, cssVars: true, complete: true }}>
-        <DisplayGate error={ErrorBoundarySDK} loading={Loading} initial={Loading}>
+      <SDKProvider
+        options={{ acceptCustomStyles: true, cssVars: true, complete: true }}
+      >
+        <DisplayGate
+          error={ErrorBoundarySDK}
+          loading={Loading}
+          initial={Loading}
+        >
           <App />
         </DisplayGate>
       </SDKProvider>

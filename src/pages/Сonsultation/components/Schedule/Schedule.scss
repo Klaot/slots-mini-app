@@ -1,0 +1,17 @@
+.schedule-day {
+  &_selects > div {
+    padding: 5px;
+    background-color: transparent;
+  }
+  &_selects > div > label {
+    padding: 10px;
+    background-color: transparent;
+  }
+  &_selects > div > label > select {
+    padding: 10px;
+    background-color: transparent;
+  }
+  &_selects > div > label > svg {
+    display: none;
+  }
+}

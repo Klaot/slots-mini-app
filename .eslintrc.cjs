@@ -1,28 +1,21 @@
 function regexp(regex) {
-  return [
-    new RegExp(regex.source + '.*[^\\u0000]$').source,
-    regex.source,
-  ];
+  return [new RegExp(regex.source + '.*[^\\u0000]$').source, regex.source];
 }
 
 module.exports = {
-  extends: [
-    'airbnb',
-    'airbnb-typescript',
-    'airbnb/hooks',
-  ],
+  extends: ['airbnb', 'airbnb-typescript', 'airbnb/hooks'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
     sourceType: 'module',
     ecmaVersion: 'latest',
   },
-  plugins: [
-    'simple-import-sort',
-  ],
+  plugins: ['simple-import-sort'],
   rules: {
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/indent': 0,
+    'no-plusplus': 'off',
+
     // Sometimes this rule decreases readability.
     'arrow-body-style': 0,
     'consistent-return': 0,
@@ -46,15 +39,21 @@ module.exports = {
 
     // We select line endings depending on current OS.
     // See: https://stackoverflow.com/q/39114446/2771889
-    'linebreak-style': ['error', (process.platform === 'win32' ? 'windows' : 'unix')],
+    'linebreak-style': [
+      'error',
+      process.platform === 'win32' ? 'windows' : 'unix',
+    ],
     'no-await-in-loop': 0,
     'no-console': 0,
     'no-continue': 0,
-    'no-multiple-empty-lines': ['error', {
-      max: 1,
-      maxEOF: 1,
-      maxBOF: 0,
-    }],
+    'no-multiple-empty-lines': [
+      'error',
+      {
+        max: 1,
+        maxEOF: 1,
+        maxBOF: 0,
+      },
+    ],
     'no-nested-ternary': 0,
     // Sometimes we need to write "void promise".
     'no-void': 0,
@@ -75,32 +74,35 @@ module.exports = {
     // Simple sort.
     // https://github.com/lydell/eslint-plugin-simple-import-sort?tab=readme-ov-file#custom-grouping
     'simple-import-sort/exports': 'error',
-    'simple-import-sort/imports': ['error', {
-      groups: [
-        // Node.js builtins prefixed with `node:`.
-        // node:fs
-        regexp(/^node:/),
+    'simple-import-sort/imports': [
+      'off',
+      {
+        groups: [
+          // Node.js builtins prefixed with `node:`.
+          // node:fs
+          regexp(/^node:/),
 
-        // Packages.
-        // react
-        regexp(/^@?\w/),
+          // Packages.
+          // react
+          regexp(/^@?\w/),
 
-        // Tsconfig alias.
-        // ~/helpers
-        regexp(/^~\//),
+          // Tsconfig alias.
+          // ~/helpers
+          regexp(/^~\//),
 
-        // Parent imports.
-        // ../Typography.js
-        regexp(/^\.\.\//),
+          // Parent imports.
+          // ../Typography.js
+          regexp(/^\.\.\//),
 
-        // Current folder imports.
-        // ./utils.js
-        regexp(/^\.\/.+\.(?!s?css)/),
+          // Current folder imports.
+          // ./utils.js
+          regexp(/^\.\/.+\.(?!s?css)/),
 
-        // Styles.
-        // ./Typography.css
-        [/\.css$/.source],
-      ],
-    }],
+          // Styles.
+          // ./Typography.css
+          [/\.css$/.source],
+        ],
+      },
+    ],
   },
 };
