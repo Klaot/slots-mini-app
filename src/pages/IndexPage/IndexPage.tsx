@@ -7,7 +7,7 @@ import { Page } from '~/components/Page/Page.tsx';
 
 import './IndexPage.css';
 import { useInitDataRaw } from '@tma.js/sdk-react';
-import { getBooking } from '~/api/booking.api';
+import { getAllBooking } from '~/api/booking.api';
 
 const mokDate = [
   {
@@ -33,12 +33,14 @@ export const IndexPage: FC = () => {
 
   useEffect(() => {
     if (authString) {
-      const parseString = Object.fromEntries(new URLSearchParams(authString).entries());
-      getBooking(authString, parseString).then((item) => {
-        if (item) {
-          setEventList(item);
-        }
-      });
+      const parsedString = Object.fromEntries(new URLSearchParams(authString).entries());
+      if (parsedString) {
+        getAllBooking(authString, parsedString).then((item) => {
+          if (item) {
+            setEventList(item);
+          }
+        });
+      }
     }
   }, [authString]);
 

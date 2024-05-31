@@ -1,4 +1,4 @@
-export const getBooking = async (authString: string, authObject: any) => {
+export const getAllBooking = async (authString: string, authObject: { [key: string]: string }) => {
   const userObject = JSON.parse(authObject.user);
   const userId = userObject?.id;
 

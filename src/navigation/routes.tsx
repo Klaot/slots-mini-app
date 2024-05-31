@@ -2,7 +2,7 @@ import type { ComponentType, JSX } from 'react';
 
 import { IndexPage } from '~/pages/IndexPage/IndexPage';
 import { LaunchParamsPage } from '~/pages/LaunchParamsPage/LaunchParamsPage.tsx';
-import { Profile } from '~/pages/profile/Profile';
+import { Profile } from '~/pages/Profile/Profile';
 import { ThemeParamsPage } from '~/pages/ThemeParamsPage/ThemeParamsPage.tsx';
 import { TONConnectPage } from '~/pages/TONConnectPage/TONConnectPage';
 import { ConsultationPage } from '~/pages/Сonsultation/Сonsultation';
